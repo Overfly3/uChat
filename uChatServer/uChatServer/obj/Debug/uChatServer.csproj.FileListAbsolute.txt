@@ -4,3 +4,8 @@ c:\users\luca\documents\visual studio 2013\Projects\uChatServer\uChatServer\bin\
 c:\users\luca\documents\visual studio 2013\Projects\uChatServer\uChatServer\bin\Debug\uChatServer.pdb
 c:\users\luca\documents\visual studio 2013\Projects\uChatServer\uChatServer\obj\Debug\uChatServer.exe
 c:\users\luca\documents\visual studio 2013\Projects\uChatServer\uChatServer\obj\Debug\uChatServer.pdb
+C:\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe.config
+C:\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe
+C:\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.pdb
+C:\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.exe
+C:\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.pdb

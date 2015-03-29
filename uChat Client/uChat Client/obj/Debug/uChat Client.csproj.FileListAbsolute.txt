@@ -1,0 +1,19 @@
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\bin\Debug\uChat Client.exe.config
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\bin\Debug\uChat Client.exe
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\bin\Debug\uChat Client.pdb
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat Client.csprojResolveAssemblyReference.cache
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat_Client.LoginDialog.resources
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat_Client.Properties.Resources.resources
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat Client.csproj.GenerateResource.Cache
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat Client.exe
+c:\users\alex\documents\visual studio 2013\Projects\uChat Client\uChat Client\obj\Debug\uChat Client.pdb
+C:\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.exe.config
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.exe
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.pdb
+C:\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.exe
+C:\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.pdb
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.csprojResolveAssemblyReference.cache
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.LoginDialog.resources
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.Properties.Resources.resources
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.csproj.GenerateResource.Cache
+C:\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.dialogs.ChatDialog.resources
