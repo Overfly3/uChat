@@ -1,0 +1,5 @@
+c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\bin\Debug\uChatClient.exe.config
+c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\bin\Debug\uChatClient.exe
+c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\bin\Debug\uChatClient.pdb
+c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\obj\Debug\uChatClient.exe
+c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\obj\Debug\uChatClient.pdb
