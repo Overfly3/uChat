@@ -3,3 +3,9 @@ c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\bin\
 c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\bin\Debug\uChatClient.pdb
 c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\obj\Debug\uChatClient.exe
 c:\users\luca\documents\visual studio 2013\Projects\uChatClient\uChatClient\obj\Debug\uChatClient.pdb
+C:\uChat\uChatClient\uChatClient\bin\Debug\uChatClient.exe.config
+C:\uChat\uChatClient\uChatClient\bin\Debug\uChatClient.exe
+C:\uChat\uChatClient\uChatClient\bin\Debug\uChatClient.pdb
+C:\uChat\uChatClient\uChatClient\obj\Debug\uChatClient.csprojResolveAssemblyReference.cache
+C:\uChat\uChatClient\uChatClient\obj\Debug\uChatClient.exe
+C:\uChat\uChatClient\uChatClient\obj\Debug\uChatClient.pdb
