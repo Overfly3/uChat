@@ -87,9 +87,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="images\uChat Logo v1.ico" />
   </ItemGroup>

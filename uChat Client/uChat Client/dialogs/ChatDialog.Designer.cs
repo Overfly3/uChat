@@ -85,15 +85,16 @@
             // 
             // uiLabelForTitle
             // 
-            this.uiLabelForTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.uiLabelForTitle.AutoSize = true;
+            this.uiLabelForTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiLabelForTitle.Font = new System.Drawing.Font("Britannic Bold", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiLabelForTitle.ForeColor = System.Drawing.Color.Green;
-            this.uiLabelForTitle.Location = new System.Drawing.Point(193, 24);
+            this.uiLabelForTitle.Location = new System.Drawing.Point(112, 1);
             this.uiLabelForTitle.Name = "uiLabelForTitle";
-            this.uiLabelForTitle.Size = new System.Drawing.Size(257, 59);
+            this.uiLabelForTitle.Size = new System.Drawing.Size(420, 105);
             this.uiLabelForTitle.TabIndex = 1;
             this.uiLabelForTitle.Text = "nickName";
+            this.uiLabelForTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
@@ -114,7 +115,7 @@
             // 
             this.uiTextBoxForChat.Cursor = System.Windows.Forms.Cursors.Default;
             this.uiTextBoxForChat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTextBoxForChat.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiTextBoxForChat.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiTextBoxForChat.ForeColor = System.Drawing.Color.DarkGreen;
             this.uiTextBoxForChat.Location = new System.Drawing.Point(3, 3);
             this.uiTextBoxForChat.Multiline = true;
@@ -144,7 +145,7 @@
             // uiTextBoxForMessage
             // 
             this.uiTextBoxForMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTextBoxForMessage.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiTextBoxForMessage.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiTextBoxForMessage.ForeColor = System.Drawing.Color.DarkGreen;
             this.uiTextBoxForMessage.Location = new System.Drawing.Point(3, 3);
             this.uiTextBoxForMessage.Multiline = true;
@@ -182,15 +183,16 @@
             // 
             // uiLabelForTitleOfUsers
             // 
-            this.uiLabelForTitleOfUsers.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.uiLabelForTitleOfUsers.AutoSize = true;
-            this.uiLabelForTitleOfUsers.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiLabelForTitleOfUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiLabelForTitleOfUsers.Font = new System.Drawing.Font("Britannic Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiLabelForTitleOfUsers.ForeColor = System.Drawing.Color.DarkGreen;
-            this.uiLabelForTitleOfUsers.Location = new System.Drawing.Point(11, 7);
+            this.uiLabelForTitleOfUsers.Location = new System.Drawing.Point(3, 0);
             this.uiLabelForTitleOfUsers.Name = "uiLabelForTitleOfUsers";
-            this.uiLabelForTitleOfUsers.Size = new System.Drawing.Size(79, 15);
+            this.uiLabelForTitleOfUsers.Size = new System.Drawing.Size(95, 29);
             this.uiLabelForTitleOfUsers.TabIndex = 0;
             this.uiLabelForTitleOfUsers.Text = "Online Users";
+            this.uiLabelForTitleOfUsers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiGroupBoxForUsers
             // 
@@ -209,11 +211,11 @@
             this.radioButton3.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton3.AutoSize = true;
             this.radioButton3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.radioButton3.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.radioButton3.Location = new System.Drawing.Point(0, 50);
+            this.radioButton3.Location = new System.Drawing.Point(0, 54);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(101, 25);
+            this.radioButton3.Size = new System.Drawing.Size(101, 27);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Text = "Fritz";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -224,11 +226,11 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.radioButton2.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.radioButton2.Location = new System.Drawing.Point(0, 25);
+            this.radioButton2.Location = new System.Drawing.Point(0, 27);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(101, 25);
+            this.radioButton2.Size = new System.Drawing.Size(101, 27);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Friedolin";
@@ -239,11 +241,11 @@
             this.radioButton1.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton1.AutoSize = true;
             this.radioButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.radioButton1.Font = new System.Drawing.Font("Britannic Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.radioButton1.Location = new System.Drawing.Point(0, 0);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(101, 25);
+            this.radioButton1.Size = new System.Drawing.Size(101, 27);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "Max";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -261,6 +263,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(536, 460);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(552, 499);
             this.Name = "ChatDialog";
             this.Text = "uChat";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatDialog_FormClosed);
