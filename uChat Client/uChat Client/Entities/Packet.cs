@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace uChatServer.Entities
+namespace uChat_Client.Entities
 {
     [Serializable]
     public enum PacketType

@@ -56,6 +56,7 @@
     <Compile Include="dialogs\LoginDialog.Designer.cs">
       <DependentUpon>LoginDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Packet.cs" />
     <Compile Include="managers\ServerCommunicationManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

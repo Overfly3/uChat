@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using uChatServer.Entities;
 
 namespace Server
 {
@@ -34,19 +37,35 @@ namespace Server
             TcpClient client = listener.AcceptTcpClient();
 
             //---get the incoming data through a network stream---
-            NetworkStream nwStream = client.GetStream();
-            byte[] buffer = new byte[client.ReceiveBufferSize];
+            //NetworkStream nwStream = client.GetStream();
+            //byte[] buffer = new byte[client.ReceiveBufferSize];
 
-            //---read incoming stream---
-            int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
+            ////---read incoming stream---
+            //int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
 
-            //---convert the data received into a string---
-            string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            Console.WriteLine("Received : " + dataReceived);
+            ////---convert the data received into a string---
+            //string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            //Console.WriteLine("Received : " + dataReceived);
 
-            //---write back the text to the client---
-            Console.WriteLine("Sending back : " + dataReceived);
-            nwStream.Write(buffer, 0, bytesRead);
+            ////---write back the text to the client---
+            //Console.WriteLine("Sending back : " + dataReceived);
+            //nwStream.Write(buffer, 0, bytesRead);
+
+            var newPacket = new Packet();
+
+            var xmlSerializer = new XmlSerializer(typeof(Packet));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                newPacket = (Packet)xmlSerializer.Deserialize(memoryStream);
+            }
+
+            var networkStream = client.GetStream();
+            if (networkStream.CanWrite)
+            {
+                newPacket = (Packet)xmlSerializer.Deserialize(networkStream);
+            }
+
             client.Close();
             listener.Stop();
         }
