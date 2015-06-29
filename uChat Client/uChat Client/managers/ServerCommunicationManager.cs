@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.IO;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using uChat_Client.Entities;
 
 namespace uChat_Client.managers
@@ -20,7 +15,7 @@ namespace uChat_Client.managers
         {
             //---create a TCPClient object at the IP and port no.---
             TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
+            Stream nwStream = client.GetStream();
             //byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
 
             //---send the text---
@@ -37,22 +32,19 @@ namespace uChat_Client.managers
             var newPacket = new Packet();
             newPacket.Message = message;
             newPacket.PacketType = PacketType.Login;
-            newPacket.ReceiverIP = IPAddress.Parse("0.0.0.0");
-            newPacket.SenderIP = IPAddress.Parse("0.0.0.0");
+            newPacket.ReceiverIP = "0.0.0.0";
+            newPacket.SenderIP = "0.0.0.0";
 
-            var xmlSerializer = new XmlSerializer(typeof(Packet));
+            //IFormatter formatter = new BinaryFormatter();
+            //formatter.Serialize(nwStream, newPacket);
+            MemoryStream stream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, newPacket);
+            byte[] bytesToSend = stream.ToArray();
 
-            using (var memoryStream = new MemoryStream())
-            {
-                xmlSerializer.Serialize(memoryStream, newPacket);
-            }
+            nwStream.WriteAsync(bytesToSend, 0, bytesToSend.Length);
 
-            var networkStream = client.GetStream();
-            if (networkStream.CanWrite)
-            {
-                xmlSerializer.Serialize(networkStream, newPacket);
-            }
-
+            
             return "";//Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
         }
     }

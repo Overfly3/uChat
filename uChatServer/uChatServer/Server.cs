@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using uChatServer.Entities;
+using uChatServer.Helpers;
 
 namespace Server
 {
@@ -19,10 +16,17 @@ namespace Server
 
         static void Main(string[] args)
         {
-           while(true)
-           {
-               startListening();
-           }
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += new ResolveEventHandler(MyResolveEventHandler);
+            while (true)
+            {
+                startListening();
+            }
+        }
+
+        private static System.Reflection.Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
+        {
+            return typeof(Packet).Assembly;
         }
 
         public static void startListening()
@@ -37,11 +41,11 @@ namespace Server
             TcpClient client = listener.AcceptTcpClient();
 
             //---get the incoming data through a network stream---
-            //NetworkStream nwStream = client.GetStream();
-            //byte[] buffer = new byte[client.ReceiveBufferSize];
+            NetworkStream nwStream = client.GetStream();
+            byte[] buffer = new byte[client.ReceiveBufferSize];
 
             ////---read incoming stream---
-            //int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
+            int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
 
             ////---convert the data received into a string---
             //string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
@@ -51,20 +55,13 @@ namespace Server
             //Console.WriteLine("Sending back : " + dataReceived);
             //nwStream.Write(buffer, 0, bytesRead);
 
-            var newPacket = new Packet();
+            //NetworkStream stream = client.GetStream();
 
-            var xmlSerializer = new XmlSerializer(typeof(Packet));
+            //IFormatter formatter = new BinaryFormatter();
+            //formatter.Binder = new PreDeserializationBinder();
 
-            using (var memoryStream = new MemoryStream())
-            {
-                newPacket = (Packet)xmlSerializer.Deserialize(memoryStream);
-            }
+            //object obj = formatter.Deserialize(stream);
 
-            var networkStream = client.GetStream();
-            if (networkStream.CanWrite)
-            {
-                newPacket = (Packet)xmlSerializer.Deserialize(networkStream);
-            }
 
             client.Close();
             listener.Stop();

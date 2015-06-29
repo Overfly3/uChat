@@ -49,3 +49,7 @@ Temporary Items
 
 .uChat Client.uChatServer.bin
 .uChat Client.uChatServer.obj
+*.exe
+*.exe
+*.cache
+*.pdb

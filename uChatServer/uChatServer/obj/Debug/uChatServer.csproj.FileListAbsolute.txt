@@ -15,3 +15,9 @@ C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.pdb
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.csprojResolveAssemblyReference.cache
+C:\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe.config
+C:\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe
+C:\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.pdb
+C:\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.exe
+C:\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.pdb
+C:\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.csprojResolveAssemblyReference.cache
