@@ -54,7 +54,7 @@ namespace uChatServer
             switch (newPacket.PacketType)
             {
                 case PacketType.Message:
-                    Send(newPacket, newPacket.Message);
+                    handleMessage(newPacket);
                     break;
 
                 case PacketType.GetOnlineUsers:
@@ -71,6 +71,19 @@ namespace uChatServer
             }
         }
 
+        private void handleMessage(Packet newPacket)
+        {
+            newPacket.ReceiverIP = getIpByNickname(newPacket.Message.Split(';')[1]);
+            Send(newPacket, newPacket.Message);
+            newPacket.ReceiverIP = newPacket.ReceiverIP;
+            Send(newPacket, newPacket.Message);
+        }
+
+        private string getIpByNickname(string nickname)
+        {
+            return _users[nickname];
+        }
+
         private void HandleLogout(Packet newPacket)
         {
             if (_users.ContainsKey(newPacket.SenderNickname))
@@ -84,7 +97,7 @@ namespace uChatServer
         {
 
             string onlineUsersString = getOnlineUsersList(newPacket.SenderNickname);
-
+            newPacket.ReceiverIP = newPacket.SenderIP;
             Send(newPacket, onlineUsersString);
         }
 
@@ -97,6 +110,8 @@ namespace uChatServer
                 _users.Add(newPacket.SenderNickname, newPacket.SenderIP);
                 success = "true";
             }
+            newPacket.ReceiverIP = newPacket.SenderIP;
+            Send(newPacket, success);
 
             foreach (var user in _users)
             {
@@ -110,8 +125,6 @@ namespace uChatServer
                     Send(onlineUsersPacket, getOnlineUsersList(user.Key));
                 }
             }
-
-            Send(newPacket, success);
         }
 
         private string getOnlineUsersList(string nickNameToRemove)
@@ -123,9 +136,13 @@ namespace uChatServer
         {
             try
             {
-                var client = new TcpClient(newPacket.SenderIP, 8000);
+                var client = new TcpClient(newPacket.ReceiverIP, 8000);
                 NetworkStream nwStream = client.GetStream();
                 var sw = new StreamWriter(nwStream);
+                if (!string.IsNullOrEmpty(str))
+                {
+                    newPacket.Message = str;
+                }
 
                 var serializedPacket = SerializeToString(newPacket);
 

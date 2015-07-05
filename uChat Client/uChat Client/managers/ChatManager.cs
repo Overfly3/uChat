@@ -61,8 +61,15 @@ namespace uChat_Client.managers
         private void ReceivePacket()
         {
             var listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8000);
-
-            listener.Start();
+            try
+            {
+                listener.Start();
+            }
+            catch (System.Exception)
+            {
+                listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 7000);
+                listener.Start();
+            }
 
             var client = listener.AcceptTcpClient();
             var nwStream = client.GetStream();
@@ -104,8 +111,11 @@ namespace uChat_Client.managers
             string[] usersString = userStringToParse.Split('/');
             foreach (string userString in usersString)
             {
-                string[] user = userString.Split(';');
-                users.Add(new User(IPAddress.Parse(user[1]), user[0]));
+                if (!string.IsNullOrEmpty(userString.Split(';')[0]))
+                {
+                    string[] user = userString.Split(';');
+                    users.Add(new User(IPAddress.Parse(user[1]), user[0]));
+                }
             }
             foreach (User user in users)
 	        {
