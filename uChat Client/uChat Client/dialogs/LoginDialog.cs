@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using uChat_Client.dialogs;
 using uChat_Client.managers;
@@ -22,12 +15,19 @@ namespace uChat_Client
 
         private void uiButtonForLogin_Click(object sender, EventArgs e)
         {
-            if(validateNickName())
+            if (validateNickName())
             {
-                new ChatDialog(uiTextBoxForNickName.Text).Show();
+                if (new ChatManager().LogIn(uiTextBoxForNickName.Text))
+                {
+                    new ChatDialog(uiTextBoxForNickName.Text).Show();
 
-                //set login dialog to unvisible if successfully logged in
-                Visible = false;
+                    //set login dialog to unvisible if successfully logged in
+                    Visible = false;
+                }
+                else
+                {
+                    createErrorMessageBox("Please make sure that you have an internet connection or change your nickname!");
+                }
             }
             else
             {
@@ -45,7 +45,7 @@ namespace uChat_Client
 
         private bool validateNickName()
         {
-            if (Regex.IsMatch(uiTextBoxForNickName.Text, @"^[a-zA-Z]+$") && ! string.IsNullOrEmpty(uiTextBoxForNickName.Text) && uiTextBoxForNickName.Text.Length <= 12)
+            if (Regex.IsMatch(uiTextBoxForNickName.Text, @"^[a-zA-Z]+$") && !string.IsNullOrEmpty(uiTextBoxForNickName.Text) && uiTextBoxForNickName.Text.Length <= 12)
             {
                 return true;
             }

@@ -16,30 +16,37 @@ namespace uChat_Client.managers
         const int PORT_NO = 5000;
         const string SERVER_IP = "127.0.0.1";
 
-        public string SendMessage(string message)
+        public string SendMessage(string message, PacketType type)
         {
-            //---create a TCPClient object at the IP and port no.---
-            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
-            StreamWriter sw = new StreamWriter(nwStream);
+            try
+            {
+                //---create a TCPClient object at the IP and port no.---
+                TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+                NetworkStream nwStream = client.GetStream();
+                StreamWriter sw = new StreamWriter(nwStream);
 
-            var newPacket = new Packet();
-            newPacket.Message = message;
-            newPacket.PacketType = PacketType.Login;
-            newPacket.ReceiverIP = "0.0.0.0";
-            newPacket.SenderIP = "0.0.0.0";
+                var newPacket = new Packet();
+                newPacket.Message = message;
+                newPacket.PacketType = type;
+                newPacket.ReceiverIP = "0.0.0.0";
+                newPacket.SenderIP = "0.0.0.0";
 
-            string serializedPacket = SerializeToString(newPacket);
+                string serializedPacket = serializeToString(newPacket);
 
-            sw.WriteLine(serializedPacket);
-            sw.Flush();
-            sw.Close();
-            client.Close();
+                sw.WriteLine(serializedPacket);
+                sw.Flush();
+                sw.Close();
+                client.Close();
 
-            return "";//Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+                return "";//Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+            }
+            catch (Exception)
+            {
+                return "false";
+            }
         }
 
-        public string SerializeToString(Packet packet)
+        private string serializeToString(Packet packet)
         {
             string serializedData = string.Empty;
 
@@ -53,7 +60,7 @@ namespace uChat_Client.managers
             return serializedData;
         }
 
-        public Packet DeserializeToObject(string data)
+        private Packet deserializeToObject(string data)
         {
             Packet deserializedPacket;
 
