@@ -27,3 +27,6 @@ C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.LoginDialog.resources
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.Properties.Resources.resources
 C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.csproj.GenerateResource.Cache
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.exe.config
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.exe
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.pdb
