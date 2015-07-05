@@ -3,7 +3,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using uChat_Client.Entities;
 using uChat_Client.managers;
 
 namespace uChat_Client.dialogs

@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using uChat_Client.dialogs;
 using uChat_Client.Entities;
 
 namespace uChat_Client.managers
 {
-    class ChatManager
+    internal class ChatManager
     {
         private ChatDialog myDialog;
+
         public ChatManager()
         {
-                
         }
 
         public ChatManager(ChatDialog dialog)
         {
             myDialog = dialog;
         }
+
         public bool LogIn(string nickName)
         {
             ServerCommunicationManager manager = new ServerCommunicationManager();
@@ -75,7 +69,6 @@ namespace uChat_Client.managers
             var receivedString = sr.ReadToEnd();
 
             var newPacket = new ServerCommunicationManager().deserializeToObject(receivedString);
-
 
             //TextBox fuu = (TextBox)myDialog.Controls.Find("", true)[0];
             //fuu.Text = "OP";

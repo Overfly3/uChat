@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using uChat_Client.Entities;
 
 namespace uChat_Client.managers
 {
-    class ServerCommunicationManager
+    internal class ServerCommunicationManager
     {
-        const int PORT_NO = 5000;
-        const string SERVER_IP = "127.0.0.1";
+        private const int PORT_NO = 5000;
+        private const string SERVER_IP = "127.0.0.1";
 
         public bool SendMessage(string message, PacketType type)
         {
