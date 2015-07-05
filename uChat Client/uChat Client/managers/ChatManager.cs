@@ -55,7 +55,7 @@ namespace uChat_Client.managers
 
         public void startListening()
         {
-            while (true && !myThreadShouldStop)
+            while (!myThreadShouldStop)
             {
                 ReceivePacket();
             }

@@ -24,9 +24,6 @@ namespace uChat_Client
             {
                 if (!new ChatManager().LogIn(uiTextBoxForNickName.Text))
                 {
-                }
-                else
-                {
                     createErrorMessageBox("Please make sure that you have an internet connection or change your nickname!");
                 }
             }

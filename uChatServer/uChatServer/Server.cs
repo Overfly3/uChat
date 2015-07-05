@@ -44,6 +44,7 @@ namespace uChatServer
 
             HandlePacket(newPacket, client);
 
+            nwStream.Flush();
             client.Close();
             listener.Stop();
         }
@@ -99,12 +100,14 @@ namespace uChatServer
             Send(newPacket, success, client);
         }
 
-        private void Send(Packet newPacket, string str, TcpClient client)
+        private void Send(Packet newPacket, string str, TcpClient oldClient)
         {
             try
             {
-                var nwStream = client.GetStream();
-                var sr = new StreamWriter(nwStream);
+                var ip = ((IPEndPoint)oldClient.Client.RemoteEndPoint).ToString().Split(':')[0];
+                var client = new TcpClient(ip, 8000);
+                NetworkStream nwStream = client.GetStream();
+                var sw = new StreamWriter(nwStream);
 
                 var packet = new Packet
                 {
@@ -116,10 +119,11 @@ namespace uChatServer
 
                 var serializedPacket = SerializeToString(packet);
 
-                sr.WriteLine(serializedPacket);
+                sw.WriteLine(serializedPacket);
 
-                sr.Flush();
-                sr.Close();
+                sw.Flush();
+                sw.Close();
+                client.Close();
             }
             catch (Exception)
             {
