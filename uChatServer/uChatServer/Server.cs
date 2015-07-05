@@ -19,10 +19,10 @@ namespace Server
 
         static void Main(string[] args)
         {
-           while(true)
-           {
-               startListening();
-           }
+            while (true)
+            {
+                startListening();
+            }
         }
 
         public static void startListening()
@@ -37,7 +37,9 @@ namespace Server
             TcpClient client = listener.AcceptTcpClient();
 
             //---get the incoming data through a network stream---
-            //NetworkStream nwStream = client.GetStream();
+            NetworkStream nwStream = client.GetStream();
+            StreamReader sr = new StreamReader(nwStream);
+
             //byte[] buffer = new byte[client.ReceiveBufferSize];
 
             ////---read incoming stream---
@@ -51,23 +53,38 @@ namespace Server
             //Console.WriteLine("Sending back : " + dataReceived);
             //nwStream.Write(buffer, 0, bytesRead);
 
-            var newPacket = new Packet();
+            Packet newPacket;
+            string receivedString = sr.ReadToEnd();
 
-            var xmlSerializer = new XmlSerializer(typeof(Packet));
-
-            using (var memoryStream = new MemoryStream())
-            {
-                newPacket = (Packet)xmlSerializer.Deserialize(memoryStream);
-            }
-
-            var networkStream = client.GetStream();
-            if (networkStream.CanWrite)
-            {
-                newPacket = (Packet)xmlSerializer.Deserialize(networkStream);
-            }
+            newPacket = DeserializeToObject(receivedString);
 
             client.Close();
             listener.Stop();
+        }
+        public static string SerializeToString(Packet packet)
+        {
+            string serializedData = string.Empty;
+
+            XmlSerializer serializer = new XmlSerializer(packet.GetType());
+
+            using (StringWriter sw = new StringWriter())
+            {
+                serializer.Serialize(sw, packet);
+                serializedData = sw.ToString();
+            }
+            return serializedData;
+        }
+
+        public static Packet DeserializeToObject(string data)
+        {
+            Packet deserializedPacket;
+
+            XmlSerializer deserializer = new XmlSerializer(typeof(Packet));
+            using (TextReader tr = new StringReader(data))
+            {
+                deserializedPacket = (Packet)deserializer.Deserialize(tr);
+            }
+            return deserializedPacket;
         }
     }
 }
