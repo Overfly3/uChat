@@ -21,3 +21,4 @@ C:\Users\LuLux3\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatSe
 C:\Users\LuLux3\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.csprojResolveAssemblyReference.cache
 C:\Users\LuLux3\Documents\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe
 C:\Users\LuLux3\Documents\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.pdb
+C:\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.csprojResolveAssemblyReference.cache

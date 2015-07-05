@@ -11,7 +11,7 @@ namespace uChat_Client.managers
         private const int PORT_NO = 5000;
         private const string SERVER_IP = "127.0.0.1";
 
-        public bool SendMessage(string message, PacketType type)
+        public bool SendMessage(string message, PacketType type, string nickname)
         {
             try
             {
@@ -24,7 +24,8 @@ namespace uChat_Client.managers
                 newPacket.Message = message;
                 newPacket.PacketType = type;
                 newPacket.ReceiverIP = "0.0.0.0";
-                newPacket.SenderIP = "0.0.0.0";
+                newPacket.SenderNickname = nickname;
+                newPacket.SenderIP = "127.0.0.1";
 
                 string serializedPacket = serializeToString(newPacket);
 

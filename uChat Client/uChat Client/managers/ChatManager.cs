@@ -11,51 +11,48 @@ namespace uChat_Client.managers
     public class ChatManager
     {
         private Form myDialog;
-        private bool myThreadShouldStop;
 
         public ChatManager()
         {
-            myThreadShouldStop = false;
         }
 
         public ChatManager(Form dialog)
         {
             myDialog = dialog;
-            myThreadShouldStop = false;
         }
 
         public bool LogIn(string nickName)
         {
             ServerCommunicationManager manager = new ServerCommunicationManager();
-            if (manager.SendMessage(nickName, PacketType.Login))
+            if (manager.SendMessage(nickName, PacketType.Login, nickName))
             {
                 return true;
             }
             return false;
         }
 
-        public void LogOut()
+        public void LogOut(string nickname)
         {
-            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.Logout);
+            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.Logout, nickname);
         }
 
-        public bool SendMessage(string messageToSend, string receiverNickName)
+        public bool SendMessage(string messageToSend, string receiverNickName, string nickname)
         {
-            if (new ServerCommunicationManager().SendMessage(messageToSend + ";" + receiverNickName, PacketType.Message))
+            if (new ServerCommunicationManager().SendMessage(messageToSend + ";" + receiverNickName, PacketType.Message, nickname))
             {
                 return true;
             }
             return false;
         }
 
-        public void GetAllOnlineUsers()
+        public void GetAllOnlineUsers(string nickname)
         {
-            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.GetOnlineUsers);
+            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.GetOnlineUsers, nickname);
         }
 
         public void startListening()
         {
-            while (!myThreadShouldStop)
+            while (true)
             {
                 ReceivePacket();
             }
@@ -81,7 +78,7 @@ namespace uChat_Client.managers
                     handleGetOnlineUsers(newPacket);
                     break;
                 case PacketType.GetOnlineState:
-                    handleGetOnlineState();
+                    handleGetOnlineState(newPacket.SenderNickname);
                     break;
                 case PacketType.Login:
                     handleLogin(newPacket);
@@ -90,11 +87,14 @@ namespace uChat_Client.managers
                     handleMessage(newPacket);
                     break;
             }
+            nwStream.Flush();
+            client.Close();
+            listener.Stop();
         }
 
         private void handleMessage(Packet newPacket)
         {
-            ((ChatDialog)myDialog).ShowMessage(newPacket.Message, newPacket.SenderIP);
+            ((ChatDialog)myDialog).ShowMessage(newPacket.Message.Split(';')[0], newPacket.SenderNickname);
         }
 
         private void handleGetOnlineUsers(Packet newPacket)
@@ -115,16 +115,20 @@ namespace uChat_Client.managers
 
         private void handleLogin(Packet packet)
         {
-            new ChatDialog(packet.Message).Show();
+            ChatDialog form = new ChatDialog(packet.SenderNickname);
+            myDialog.Invoke((MethodInvoker)delegate()
+            {
+                form.Show();
+            });
 
             //set login dialog to unvisible if successfully logged in
             myDialog.Visible = false;
-            myThreadShouldStop = true;
+            myDialog = form;
         }
 
-        private void handleGetOnlineState()
+        private void handleGetOnlineState(string nickname)
         {
-            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.GetOnlineState);
+            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.GetOnlineState, nickname);
         }
     }
 }

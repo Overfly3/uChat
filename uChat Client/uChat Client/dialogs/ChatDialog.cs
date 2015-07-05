@@ -13,14 +13,20 @@ namespace uChat_Client.dialogs
         {
             InitializeComponent();
             uiLabelForTitle.Text = nickName;
+            CheckForIllegalCrossThreadCalls = false;
 
             setUi();
         }
 
         private void setUi()
         {
-            new ChatManager().GetAllOnlineUsers();
+            new ChatManager().GetAllOnlineUsers(GetNickname());
             uiTextBoxForMessage.Select();
+        }
+
+        public string GetNickname()
+        {
+            return uiLabelForTitle.Text;
         }
 
         public void AddNewUserToUi(string nickName)
@@ -56,7 +62,7 @@ namespace uChat_Client.dialogs
             if (!string.IsNullOrEmpty(uiTextBoxForMessage.Text))
             {
                 string messageToSend = uiTextBoxForMessage.Text;
-                if (new ChatManager().SendMessage(messageToSend, getSelectedUserName()))
+                if (new ChatManager().SendMessage(messageToSend, getSelectedUserName(), GetNickname()))
                 {
                     uiTextBoxForMessage.Text = string.Empty;
                 }
@@ -69,7 +75,7 @@ namespace uChat_Client.dialogs
 
         public void ShowMessage(string messageToSend, string nickName)
         {
-            uiTextBoxForChat.Text += "[" + DateTime.Now + "]" + nickName + ": " + messageToSend + "\r\n";
+            uiTextBoxForChat.Text += "[" + DateTime.Now.ToString("H:mm") + "]" + nickName + ": " + messageToSend + "\r\n";
             //move the caret to the end of the text
             uiTextBoxForChat.SelectionStart = uiTextBoxForChat.TextLength;
             //scroll to the caret
@@ -85,7 +91,7 @@ namespace uChat_Client.dialogs
 
         private void ChatDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            new ChatManager().LogOut();
+            new ChatManager().LogOut(GetNickname());
             Application.Exit();
         }
 

@@ -15,11 +15,13 @@ namespace uChatServer.Entities
     [Serializable]
     public class Packet
     {
+        public string SenderIP { get; set; }
+
         public PacketType PacketType { get; set; }
 
         public string Message { get; set; }
 
-        public string SenderIP { get; set; }
+        public string SenderNickname { get; set; }
 
         public string ReceiverIP { get; set; }
     }

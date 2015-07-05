@@ -9,16 +9,16 @@ using uChatServer.Entities;
 
 namespace uChatServer
 {
-    internal class Program
+    public class Program
     {
         private const int PortNo = 5000;
         private const string ServerIp = "127.0.0.1";
 
-        private Dictionary<string, TcpClient> _users;
+        private Dictionary<string, string> _users;
 
         private static void Main(string[] args)
         {
-            var program = new Program { _users = new Dictionary<string, TcpClient>() };
+            var program = new Program { _users = new Dictionary<string, string>() };
 
             while (true)
             {
@@ -42,82 +42,73 @@ namespace uChatServer
 
             var newPacket = DeserializeToObject(receivedString);
 
-            HandlePacket(newPacket, client);
+            HandlePacket(newPacket);
 
             nwStream.Flush();
             client.Close();
             listener.Stop();
         }
 
-        private void HandlePacket(Packet newPacket, TcpClient client)
+        private void HandlePacket(Packet newPacket)
         {
             switch (newPacket.PacketType)
             {
                 case PacketType.Message:
-                    Send(newPacket, newPacket.Message, client);
+                    Send(newPacket, newPacket.Message);
                     break;
 
                 case PacketType.GetOnlineUsers:
-                    SendOnlineUsers(newPacket, client);
+                    SendOnlineUsers(newPacket);
                     break;
 
                 case PacketType.Login:
-                    HandleLogin(newPacket, client);
+                    HandleLogin(newPacket);
                     break;
 
                 case PacketType.Logout:
-                    HandleLogout(newPacket, client);
+                    HandleLogout(newPacket);
                     break;
             }
         }
 
-        private void HandleLogout(Packet newPacket, TcpClient client)
+        private void HandleLogout(Packet newPacket)
         {
-            if (_users.ContainsKey(newPacket.SenderIP))
+            if (_users.ContainsKey(newPacket.SenderNickname))
             {
-                _users.Remove(newPacket.SenderIP);
+                _users.Remove(newPacket.SenderNickname);
             }
-            Send(newPacket, "true", client);
+            Send(newPacket, "true");
         }
 
-        private void SendOnlineUsers(Packet newPacket, TcpClient client)
+        private void SendOnlineUsers(Packet newPacket)
         {
 
-            string onlineUsersString = _users.Aggregate<KeyValuePair<string, TcpClient>, string>(null, (current, user) => current + (user.Key + ";" + ((IPEndPoint)user.Value.Client.RemoteEndPoint).ToString() + "/"));
-            Send(newPacket, onlineUsersString, client);
+            string onlineUsersString = _users.Aggregate<KeyValuePair<string, string>, string>(null, (current, user) => current + (user.Key + ";" + newPacket.SenderIP + "/"));
+            Send(newPacket, onlineUsersString);
         }
 
-        private void HandleLogin(Packet newPacket, TcpClient client)
+        private void HandleLogin(Packet newPacket)
         {
             string success = "false";
 
-            if (!_users.ContainsKey(newPacket.SenderIP))
+            if (!_users.ContainsKey(newPacket.SenderNickname))
             {
-                _users.Add(newPacket.SenderIP, client);
+                _users.Add(newPacket.SenderNickname, newPacket.SenderIP);
                 success = "true";
             }
 
-            Send(newPacket, success, client);
+            Send(newPacket, success);
         }
 
-        private void Send(Packet newPacket, string str, TcpClient oldClient)
+        private void Send(Packet newPacket, string str)
         {
             try
             {
-                var ip = ((IPEndPoint)oldClient.Client.RemoteEndPoint).ToString().Split(':')[0];
-                var client = new TcpClient(ip, 8000);
+                var client = new TcpClient(newPacket.SenderIP, 8000);
                 NetworkStream nwStream = client.GetStream();
                 var sw = new StreamWriter(nwStream);
 
-                var packet = new Packet
-                {
-                    Message = str,
-                    PacketType = newPacket.PacketType,
-                    SenderIP = newPacket.SenderIP,
-                    ReceiverIP = newPacket.ReceiverIP
-                };
-
-                var serializedPacket = SerializeToString(packet);
+                var serializedPacket = SerializeToString(newPacket);
 
                 sw.WriteLine(serializedPacket);
 

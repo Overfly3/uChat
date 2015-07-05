@@ -16,6 +16,7 @@ namespace uChat_Client
             //Care on refactoring otherwise UI wont be loaded the right way!
             myLoginThread = new Thread(new ChatManager(this).startListening);
             myLoginThread.Start();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void uiButtonForLogin_Click(object sender, EventArgs e)
