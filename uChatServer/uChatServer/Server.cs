@@ -83,7 +83,8 @@ namespace uChatServer
         private void SendOnlineUsers(Packet newPacket)
         {
 
-            string onlineUsersString = _users.Aggregate<KeyValuePair<string, string>, string>(null, (current, user) => current + (user.Key + ";" + newPacket.SenderIP + "/"));
+            string onlineUsersString = getOnlineUsersList(newPacket.SenderNickname);
+
             Send(newPacket, onlineUsersString);
         }
 
@@ -97,7 +98,25 @@ namespace uChatServer
                 success = "true";
             }
 
+            foreach (var user in _users)
+            {
+                if (user.Key != newPacket.SenderNickname)
+                {
+                    var onlineUsersPacket = new Packet
+                    {
+                        PacketType = PacketType.GetOnlineUsers,
+                        ReceiverIP = user.Value
+                    };
+                    Send(onlineUsersPacket, getOnlineUsersList(user.Key));
+                }
+            }
+
             Send(newPacket, success);
+        }
+
+        private string getOnlineUsersList(string nickNameToRemove)
+        {
+            return _users.Where(user => user.Key != nickNameToRemove).Aggregate<KeyValuePair<string, string>, string>(null, (current, user) => current + (user.Key + ";" + user.Value + "/"));
         }
 
         private void Send(Packet newPacket, string str)
