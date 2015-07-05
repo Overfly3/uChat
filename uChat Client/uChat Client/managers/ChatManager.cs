@@ -1,22 +1,27 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Forms;
 using uChat_Client.dialogs;
 using uChat_Client.Entities;
 
 namespace uChat_Client.managers
 {
-    internal class ChatManager
+    public class ChatManager
     {
-        private ChatDialog myDialog;
+        private Form myDialog;
+        private bool myThreadShouldStop;
 
         public ChatManager()
         {
+            myThreadShouldStop = false;
         }
 
-        public ChatManager(ChatDialog dialog)
+        public ChatManager(Form dialog)
         {
             myDialog = dialog;
+            myThreadShouldStop = false;
         }
 
         public bool LogIn(string nickName)
@@ -50,7 +55,7 @@ namespace uChat_Client.managers
 
         public void startListening()
         {
-            while (true)
+            while (true && !myThreadShouldStop)
             {
                 ReceivePacket();
             }
@@ -70,15 +75,56 @@ namespace uChat_Client.managers
 
             var newPacket = new ServerCommunicationManager().deserializeToObject(receivedString);
 
-            //TextBox fuu = (TextBox)myDialog.Controls.Find("", true)[0];
-            //fuu.Text = "OP";
-
             switch (newPacket.PacketType)
             {
                 case PacketType.GetOnlineUsers:
-
+                    handleGetOnlineUsers(newPacket);
+                    break;
+                case PacketType.GetOnlineState:
+                    handleGetOnlineState();
+                    break;
+                case PacketType.Login:
+                    handleLogin(newPacket);
+                    break;
+                case PacketType.Message:
+                    handleMessage(newPacket);
                     break;
             }
+        }
+
+        private void handleMessage(Packet newPacket)
+        {
+            ((ChatDialog)myDialog).ShowMessage(newPacket.Message, newPacket.SenderIP);
+        }
+
+        private void handleGetOnlineUsers(Packet newPacket)
+        {
+            List<User> users = new List<User>();
+            string userStringToParse = newPacket.Message;
+            string[] usersString = userStringToParse.Split('/');
+            foreach (string userString in usersString)
+            {
+                string[] user = userString.Split(';');
+                users.Add(new User(IPAddress.Parse(user[1]), user[0]));
+            }
+            foreach (User user in users)
+	        {
+                ((ChatDialog)myDialog).AddNewUserToUi(user.NickName);
+	        }
+        }
+
+        private void handleLogin(Packet packet)
+        {
+            new ChatDialog(packet.Message).Show();
+
+            //set login dialog to unvisible if successfully logged in
+            myDialog.Visible = false;
+            myThreadShouldStop = true;
+        }
+
+        private void handleGetOnlineState()
+        {
+            new ServerCommunicationManager().SendMessage(string.Empty, PacketType.GetOnlineState);
         }
     }
 }

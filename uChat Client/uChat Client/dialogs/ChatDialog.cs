@@ -14,10 +14,6 @@ namespace uChat_Client.dialogs
             InitializeComponent();
             uiLabelForTitle.Text = nickName;
 
-            //Care on refactoring otherwise UI wont be loaded the right way!
-            Thread thread = new Thread(new ChatManager(this).startListening);
-            thread.Start();
-
             setUi();
         }
 
@@ -62,12 +58,7 @@ namespace uChat_Client.dialogs
                 string messageToSend = uiTextBoxForMessage.Text;
                 if (new ChatManager().SendMessage(messageToSend, getSelectedUserName()))
                 {
-                    ShowMessage(messageToSend);
                     uiTextBoxForMessage.Text = string.Empty;
-                    //move the caret to the end of the text
-                    uiTextBoxForChat.SelectionStart = uiTextBoxForChat.TextLength;
-                    //scroll to the caret
-                    uiTextBoxForChat.ScrollToCaret();
                 }
                 else
                 {
@@ -76,9 +67,13 @@ namespace uChat_Client.dialogs
             }
         }
 
-        public void ShowMessage(string messageToSend)
+        public void ShowMessage(string messageToSend, string nickName)
         {
-            uiTextBoxForChat.Text += uiLabelForTitle.Text + ": " + messageToSend + "\r\n";
+            uiTextBoxForChat.Text += "[" + DateTime.Now + "]" + nickName + ": " + messageToSend + "\r\n";
+            //move the caret to the end of the text
+            uiTextBoxForChat.SelectionStart = uiTextBoxForChat.TextLength;
+            //scroll to the caret
+            uiTextBoxForChat.ScrollToCaret();
         }
 
         private string getSelectedUserName()

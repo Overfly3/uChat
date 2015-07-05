@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
-using uChat_Client.dialogs;
 using uChat_Client.managers;
 
 namespace uChat_Client
 {
     public partial class LoginDialog : Form
     {
+        private Thread myLoginThread;
+
         public LoginDialog()
         {
             InitializeComponent();
+            //Care on refactoring otherwise UI wont be loaded the right way!
+            myLoginThread = new Thread(new ChatManager(this).startListening);
+            myLoginThread.Start();
         }
 
         private void uiButtonForLogin_Click(object sender, EventArgs e)
         {
             if (validateNickName())
             {
-                if (new ChatManager().LogIn(uiTextBoxForNickName.Text))
+                if (!new ChatManager().LogIn(uiTextBoxForNickName.Text))
                 {
-                    new ChatDialog(uiTextBoxForNickName.Text).Show();
-
-                    //set login dialog to unvisible if successfully logged in
-                    Visible = false;
                 }
                 else
                 {
@@ -54,5 +55,7 @@ namespace uChat_Client
                 return false;
             }
         }
+
+        public Thread LoginThread { get { return myLoginThread; } }
     }
 }
