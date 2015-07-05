@@ -16,7 +16,7 @@ namespace uChat_Client.managers
         const int PORT_NO = 5000;
         const string SERVER_IP = "127.0.0.1";
 
-        public string SendMessage(string message, PacketType type)
+        public bool SendMessage(string message, PacketType type)
         {
             try
             {
@@ -38,11 +38,11 @@ namespace uChat_Client.managers
                 sw.Close();
                 client.Close();
 
-                return "";//Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+                return true;
             }
             catch (Exception)
             {
-                return "false";
+                return false;
             }
         }
 
@@ -60,7 +60,7 @@ namespace uChat_Client.managers
             return serializedData;
         }
 
-        private Packet deserializeToObject(string data)
+        public Packet deserializeToObject(string data)
         {
             Packet deserializedPacket;
 

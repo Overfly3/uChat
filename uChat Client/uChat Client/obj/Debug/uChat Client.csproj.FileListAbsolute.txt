@@ -30,3 +30,10 @@ C:\Users\Alex\Desktop\Arbeit\Schuel\Benutzerschnittstellen implementieren\uChat\
 C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.exe.config
 C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.exe
 C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.pdb
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.csprojResolveAssemblyReference.cache
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.dialogs.ChatDialog.resources
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.LoginDialog.resources
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat_Client.Properties.Resources.resources
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\obj\Debug\uChat Client.csproj.GenerateResource.Cache
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.exe
+C:\Users\LuLux3\Documents\GitHub\uChat\uChat Client\uChat Client\bin\Debug\uChat Client.pdb

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using uChat_Client.Entities;
 using uChat_Client.managers;
@@ -13,19 +14,21 @@ namespace uChat_Client.dialogs
         {
             InitializeComponent();
             uiLabelForTitle.Text = nickName;
+
+            //Care on refactoring otherwise UI wont be loaded the right way!
+            Thread thread = new Thread(new ChatManager(this).startListening);
+            thread.Start();
+
             setUi();
-            uiTextBoxForMessage.Select();
         }
 
         private void setUi()
         {
-            foreach (User user in new ChatManager().GetAllOnlineUsers())
-            {
-                addNewUserToUi(user.NickName);
-            }
+            new ChatManager().GetAllOnlineUsers();
+            uiTextBoxForMessage.Select();
         }
 
-        private void addNewUserToUi(string nickName)
+        public void AddNewUserToUi(string nickName)
         {
             RadioButton radioButton = new RadioButton();
             radioButton.Appearance = System.Windows.Forms.Appearance.Button;
@@ -37,6 +40,20 @@ namespace uChat_Client.dialogs
             radioButton.Size = new System.Drawing.Size(101, 27);
             radioButton.Text = nickName;
             radioButton.UseVisualStyleBackColor = true;
+
+            //this.radioButton2.Appearance = System.Windows.Forms.Appearance.Button;
+            //this.radioButton2.AutoSize = true;
+            //this.radioButton2.Checked = true;
+            //this.radioButton2.Dock = System.Windows.Forms.DockStyle.Top;
+            //this.radioButton2.Font = new System.Drawing.Font("Britannic Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.radioButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            //this.radioButton2.Location = new System.Drawing.Point(0, 27);
+            //this.radioButton2.Name = "radioButton2";
+            //this.radioButton2.Size = new System.Drawing.Size(101, 27);
+            //this.radioButton2.TabIndex = 1;
+            //this.radioButton2.TabStop = true;
+            //this.radioButton2.Text = "Friedolin";
+            //this.radioButton2.UseVisualStyleBackColor = true;
         }
 
         private void uiButtonForSendMessage_Click(object sender, EventArgs e)
@@ -46,7 +63,7 @@ namespace uChat_Client.dialogs
                 string messageToSend = uiTextBoxForMessage.Text;
                 if (new ChatManager().SendMessage(messageToSend, getSelectedUserName()))
                 {
-                    showMessage(messageToSend);
+                    ShowMessage(messageToSend);
                     uiTextBoxForMessage.Text = string.Empty;
                     //move the caret to the end of the text
                     uiTextBoxForChat.SelectionStart = uiTextBoxForChat.TextLength;
@@ -60,7 +77,7 @@ namespace uChat_Client.dialogs
             }
         }
 
-        private void showMessage(string messageToSend)
+        public void ShowMessage(string messageToSend)
         {
             uiTextBoxForChat.Text += uiLabelForTitle.Text + ": " + messageToSend + "\r\n";
         }
