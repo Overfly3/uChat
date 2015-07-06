@@ -53,7 +53,5 @@ namespace uChat_Client
                 return false;
             }
         }
-
-        public Thread LoginThread { get { return myLoginThread; } }
     }
 }
