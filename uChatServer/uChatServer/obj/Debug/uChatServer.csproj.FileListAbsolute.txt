@@ -25,3 +25,6 @@ C:\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.csprojResolveAssemblyRefe
 C:\Users\Alex\Documents\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe.config
 C:\Users\Alex\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.exe
 C:\Users\Alex\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.pdb
+C:\Users\Luca\Documents\GitHub\uChat\uChatServer\uChatServer\bin\Debug\uChatServer.exe.config
+C:\Users\Luca\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.exe
+C:\Users\Luca\Documents\GitHub\uChat\uChatServer\uChatServer\obj\Debug\uChatServer.pdb
