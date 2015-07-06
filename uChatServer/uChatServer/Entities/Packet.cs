@@ -3,6 +3,7 @@
 namespace uChatServer.Entities
 {
     [Serializable]
+    
     public enum PacketType
     {
         Login,
@@ -11,7 +12,9 @@ namespace uChatServer.Entities
         Message,
         GetOnlineState
     }
-
+    /// <summary>
+    /// Packet body to be sent. has to be the same on the client side, so that it can be serialized and deserialized.
+    /// </summary>
     [Serializable]
     public class Packet
     {

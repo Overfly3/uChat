@@ -20,15 +20,21 @@ namespace uChat_Client.managers
                 NetworkStream nwStream = client.GetStream();
                 StreamWriter sw = new StreamWriter(nwStream);
 
-                var newPacket = new Packet();
-                newPacket.Message = message;
-                newPacket.PacketType = type;
-                newPacket.ReceiverIP = "0.0.0.0";
-                newPacket.SenderNickname = nickname;
-                newPacket.SenderIP = "127.0.0.1";
+                //create a basic packet with message type to send
+                var newPacket = new Packet
+                {
+                    Message = message,
+                    PacketType = type,
+                    ReceiverIP = "0.0.0.0",
+                    SenderNickname = nickname,
+                    SenderIP = "127.0.0.1"
+                };
 
+                //serialize the pacet object to a xml string
                 string serializedPacket = serializeToString(newPacket);
 
+                //write the serialized xml string into the stream
+                //flush and close are necessary to be sure that the stream will be sent.
                 sw.WriteLine(serializedPacket);
                 sw.Flush();
                 sw.Close();
@@ -42,6 +48,11 @@ namespace uChat_Client.managers
             }
         }
 
+        /// <summary>
+        /// Helper method to serialize an object to an xml string.
+        /// </summary>
+        /// <param name="packet">Packet object to serialize</param>
+        /// <returns>Serialized xml string</returns>
         private string serializeToString(Packet packet)
         {
             string serializedData = string.Empty;
@@ -56,6 +67,11 @@ namespace uChat_Client.managers
             return serializedData;
         }
 
+        /// <summary>
+        /// Helper method to deserialized an xml string to an object.
+        /// </summary>
+        /// <param name="data">Serialized xml string</param>
+        /// <returns>Deserialized PAcket object</returns>
         public Packet deserializeToObject(string data)
         {
             Packet deserializedPacket;
